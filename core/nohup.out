@@ -1,0 +1,692 @@
+2021/11/05 09:20:24.020 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.022 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.025 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.026 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.029 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.030 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.033 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.035 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.037 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.039 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/05 09:20:24.040 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/05 09:20:24.045 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/05 10:05:44.168 [1;44m[D][0m [mask.go:1174]  bgplist
+
+2021/11/05 10:05:45.498 [1;44m[D][0m [mask.go:1385]  file /www/bbbmarkservices/bgpdir/490c6f055659913a3906863b55832005.pdf exist,download it.
+
+2021/11/05 10:06:26.828 [1;44m[D][0m [bigfile.go:394]  bgplist
+
+2021/11/05 10:10:00.857 [1;44m[D][0m [bigfile.go:394]  bgplist
+
+FileLogWriter("./logs/bbbmarkservices.critical.log"): Rotate: rename ./logs/bbbmarkservices.critical.log ./logs/bbbmarkservices.critical.2021-11-06.001.log: no such file or directory
+FileLogWriter("./logs/bbbmarkservices.emergency.log"): Rotate: rename ./logs/bbbmarkservices.emergency.log ./logs/bbbmarkservices.emergency.2021-11-06.001.log: no such file or directory
+2021/11/08 06:02:34.105 [1;44m[D][0m [mask.go:1174]  bgplist
+
+2021/11/08 06:02:41.222 [1;44m[D][0m [mask.go:668]  fileext:.pdf
+
+0001/01/01 00:00:00.000 [1;37m[M][0m [log.go:188]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+
+2021/11/08 06:02:41.836 [1;44m[D][0m [mask.go:1057]  /www/bbbmarkservices/upload/3eb7e8c1ce94f04482867f8d47cc7680_1.pdf
+
+2021/11/08 06:02:41.838 [1;44m[D][0m [mask.go:1070]  本轮读取了 num=[2048000] byte
+
+2021/11/08 06:02:41.842 [1;44m[D][0m [mask.go:1078]  本次保存分片Size为 num == [2048000] 
+
+2021/11/08 06:02:42.080 [1;44m[D][0m [mask.go:1057]  /www/bbbmarkservices/upload/3eb7e8c1ce94f04482867f8d47cc7680_2.pdf
+
+2021/11/08 06:02:42.081 [1;44m[D][0m [mask.go:1070]  本轮读取了 num=[2048000] byte
+
+2021/11/08 06:02:42.085 [1;44m[D][0m [mask.go:1078]  本次保存分片Size为 num == [2048000] 
+
+2021/11/08 06:02:42.469 [1;44m[D][0m [mask.go:1057]  /www/bbbmarkservices/upload/3eb7e8c1ce94f04482867f8d47cc7680_3.pdf
+
+2021/11/08 06:02:42.469 [1;44m[D][0m [mask.go:1070]  本轮读取了 num=[3933469] byte
+
+2021/11/08 06:02:42.472 [1;44m[D][0m [mask.go:1078]  本次保存分片Size为 num == [3933469] 
+
+2021/11/08 06:02:42.474 [1;44m[D][0m [mask.go:1115]  本次读取了 2048000
+
+2021/11/08 06:02:42.476 [1;44m[D][0m [mask.go:1115]  本次读取了 2048000
+
+2021/11/08 06:02:42.482 [1;44m[D][0m [mask.go:1115]  本次读取了 3933469
+
+2021/11/08 06:02:42.496 [1;44m[D][0m [mask.go:1146]  file copy into md5 bytes:[8029469]
+
+2021/11/08 06:02:42.496 [1;44m[D][0m [pdffiledb.go:108]  receive /www/bbbmarkservices/upload/3eb7e8c1ce94f04482867f8d47cc7680.pdf
+
+2021/11/08 06:02:42.496 [1;44m[D][0m [pdffiledb.go:119]  out file:/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf
+
+2021/11/08 06:02:42.535 [1;44m[D][0m [mask.go:1174]  bgplist
+
+2021/11/08 06:02:47.866 [1;44m[D][0m [mongdb.go:82]  (BadValue) bad sort specification
+
+2021/11/08 06:02:47.867 [1;44m[D][0m [mask.go:164]  计算铺码信息...
+
+2021/11/08 06:02:47.867 [1;44m[D][0m [mask.go:588]  The current operation system is  linux
+
+2021/11/08 06:02:47.867 [1;44m[D][0m [mask.go:594]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/08 06:02:48.300 [1;44m[D][0m [mask.go:619]  PDFCheckResult:{
+    "result": {
+        "embed_tool_version": "V1.4.2211012",
+        "orgin_pdf_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf",
+        "page_content_height_in_mm": 266,
+        "page_content_width_in_mm": 191,
+        "page_count": 20,
+        "page_height_in_mm": 266,
+        "page_width_in_mm": 191,
+        "pdf_md5": "3eb7e8c1ce94f04482867f8d47cc7680",
+        "suggest_paper_type": 14,
+        "suggest_paper_type_name": "Paper_Big16KP",
+        "with_bleeding": false
+    },
+    "state": true
+}
+
+
+
+2021/11/08 06:02:48.300 [1;44m[D][0m [mask.go:627]  {
+    "result": {
+        "embed_tool_version": "V1.4.2211012",
+        "orgin_pdf_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf",
+        "page_content_height_in_mm": 266,
+        "page_content_width_in_mm": 191,
+        "page_count": 20,
+        "page_height_in_mm": 266,
+        "page_width_in_mm": 191,
+        "pdf_md5": "3eb7e8c1ce94f04482867f8d47cc7680",
+        "suggest_paper_type": 14,
+        "suggest_paper_type_name": "Paper_Big16KP",
+        "with_bleeding": false
+    },
+    "state": true
+}
+
+
+
+2021/11/08 06:02:48.300 [1;44m[D][0m [mask.go:179]  计算的点阵码页面类型：Paper_Big16KP
+
+2021/11/08 06:02:48.301 [1;44m[D][0m [mask.go:181]  申请点阵码...
+
+2021/11/08 06:02:48.401 [1;44m[D][0m [mask.go:208]  申请的点阵码页面类型：Paper_Big16KP
+
+2021/11/08 06:02:48.402 [1;44m[D][0m [mask.go:228]  {200 成功 Paper_Big16KP 191 266 1910 1929}
+
+2021/11/08 06:02:48.402 [1;44m[D][0m [mask.go:230]  开始铺码...
+
+2021/11/08 06:02:48.402 [1;44m[D][0m [mask.go:240]  jsonid:
+
+2021/11/08 06:02:48.402 [1;44m[D][0m [mask.go:649]  The current operation system is  linux
+
+2021/11/08 06:02:48.403 [1;44m[D][0m [mask.go:677]  The covermask program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/08 06:02:50.410 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:02:52.411 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:02:54.411 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:02:56.412 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:02:58.413 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:03:00.410 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:03:02.410 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:03:04.411 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 50 2 4 200  执行铺码 0 0}
+
+2021/11/08 06:03:05.435 [1;44m[D][0m [mask.go:773]  EmbedProgress:{
+    "currentPage": 1,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 2,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 3,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 4,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 5,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 6,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 7,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 8,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 9,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 10,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 11,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 12,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 13,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 14,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 15,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 16,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 17,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 18,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 19,
+    "totalPages": 20
+}
+
+EmbedProgress:{
+    "currentPage": 20,
+    "totalPages": 20
+}
+
+EmbedResult:{
+    "result": {
+        "bg_images_folder_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680",
+        "embed_for_print_or_press": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.20211108.Paper_Big16KP(14).(1910-1929).600_4.k.pdf",
+        "embed_tool_version": "V1.4.2211012",
+        "embedded_pdf_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.20211108.Paper_Big16KP(14).(1910-1929).600_4.k.pdf",
+        "ogrin_pdf_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf",
+        "pdf_md5": "3eb7e8c1ce94f04482867f8d47cc7680",
+        "should_export_bg_images": true
+    },
+    "state": true
+}
+
+
+
+2021/11/08 06:03:05.435 [1;44m[D][0m [mask.go:786]  {
+    "result": {
+        "bg_images_folder_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680",
+        "embed_for_print_or_press": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.20211108.Paper_Big16KP(14).(1910-1929).600_4.k.pdf",
+        "embed_tool_version": "V1.4.2211012",
+        "embedded_pdf_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.20211108.Paper_Big16KP(14).(1910-1929).600_4.k.pdf",
+        "ogrin_pdf_path": "/www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf",
+        "pdf_md5": "3eb7e8c1ce94f04482867f8d47cc7680",
+        "should_export_bg_images": true
+    },
+    "state": true
+}
+
+
+
+2021/11/08 06:03:05.655 [1;44m[D][0m [mask.go:340]  完成铺码，写入铺码记录...
+
+2021/11/08 06:03:05.655 [1;44m[D][0m [mask.go:345]  建立标引页面...
+
+2021/11/08 06:03:05.655 [1;44m[D][0m [mask.go:346]  6188bd88a68d48e424ddbe8f
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mongdb.go:82]  (BadValue) bad sort specification
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mongdb.go:305]  Deleted 0 documents in the trainers collection
+
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe90") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1910 Paper_Big16KP 1 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1910.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe91") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1911 Paper_Big16KP 2 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1911.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe92") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1912 Paper_Big16KP 3 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1912.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe93") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1913 Paper_Big16KP 4 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1913.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe94") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1914 Paper_Big16KP 5 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1914.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe95") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1915 Paper_Big16KP 6 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1915.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe96") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1916 Paper_Big16KP 7 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1916.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe97") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1917 Paper_Big16KP 8 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1917.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe98") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1918 Paper_Big16KP 9 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1918.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe99") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1919 Paper_Big16KP 10 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1919.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe9a") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1920 Paper_Big16KP 11 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1920.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe9b") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1921 Paper_Big16KP 12 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1921.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe9c") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1922 Paper_Big16KP 13 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1922.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe9d") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1923 Paper_Big16KP 14 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1923.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe9e") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1924 Paper_Big16KP 15 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1924.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbe9f") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1925 Paper_Big16KP 16 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1925.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbea0") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1926 Paper_Big16KP 17 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1926.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbea1") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1927 Paper_Big16KP 18 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1927.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbea2") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1928 Paper_Big16KP 19 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1928.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:490]  {ObjectID("6188bd99a68d48e424ddbea3") testing20211008.pdf  3eb7e8c1ce94f04482867f8d47cc7680 1929 Paper_Big16KP 20 20 1636351385 1636351385 /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680/Paper_Big16KP-1929.png}
+
+2021/11/08 06:03:05.656 [1;44m[D][0m [mask.go:494]  批量录入标引页面
+
+2021/11/08 06:03:06.411 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 75 3 4 200  写入铺码记录 0 0}
+
+2021/11/08 06:03:08.410 [1;44m[D][0m [mask.go:84]  {ObjectID("6188bd87a68d48e424ddbe8e") testing20211008.pdf 3eb7e8c1ce94f04482867f8d47cc7680 100 4 4 200  铺码完成 0 0}
+
+2021/11/08 06:03:09.437 [1;44m[D][0m [mask.go:1174]  bgplist
+
+2021/11/08 06:03:34.037 [1;44m[D][0m [mask.go:1339]  file /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf exist,download it.
+
+2021/11/08 06:04:04.152 [1;44m[D][0m [mask.go:1339]  file /www/bbbmarkservices/bgpdir/20211108060305.Paper_Big16KP(14).(1910-1929).600_4.k_含出血线_打印.pdf exist,download it.
+
+2021/11/08 06:30:18.143 [1;44m[D][0m [mask.go:1339]  file /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf exist,download it.
+
+2021/11/08 07:16:12.813 [1;44m[D][0m [mask.go:1174]  bgplist
+
+2021/11/08 07:16:13.801 [1;44m[D][0m [mask.go:1385]  file /www/bbbmarkservices/bgpdir/3eb7e8c1ce94f04482867f8d47cc7680.pdf exist,download it.
+
+2021/11/10 09:49:19.697 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.722 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.724 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.726 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.728 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.730 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.732 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.734 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.736 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.738 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 09:49:19.739 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/10 09:49:19.745 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/10 10:14:11.478 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.480 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.482 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.486 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.488 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.491 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.493 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.496 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.498 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.500 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/10 10:14:11.502 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/10 10:14:11.506 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/11 09:25:52.065 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.067 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.070 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.073 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.075 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.077 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.079 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.081 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.083 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.085 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/11 09:25:52.086 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/11 09:25:52.091 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/13 01:21:11.679 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/13 01:21:11.679 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/13 01:21:12.016 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/13 01:21:12.016 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/13 01:21:33.503 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/13 01:21:33.503 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/13 01:21:33.512 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/13 01:21:33.512 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/13 01:23:32.785 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/13 01:23:32.785 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/13 01:23:32.797 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/13 01:23:32.797 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/13 02:19:15.396 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.402 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.404 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.409 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.411 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.413 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.415 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.417 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.419 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.421 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/13 02:19:15.422 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/13 02:19:15.427 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/15 03:22:36.242 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.260 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.264 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.269 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.274 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.279 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.284 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.288 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.292 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.297 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:22:36.299 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/15 03:22:36.308 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/15 03:22:40.232 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/15 03:22:40.232 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/15 03:22:40.271 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/15 03:22:40.271 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/15 03:24:14.050 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.052 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.054 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.056 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.058 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.060 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.062 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.064 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.067 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.069 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 03:24:14.070 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/15 03:24:14.074 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/15 03:24:53.102 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/15 03:24:53.102 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/15 03:24:53.109 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/15 03:24:53.110 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/15 03:24:57.567 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/15 03:24:57.567 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/15 03:24:57.574 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/15 03:24:57.574 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/15 03:24:58.927 [1;44m[D][0m [mask.go:1180]  bgplist
+
+2021/11/15 09:08:21.563 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/15 09:08:21.563 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/15 09:08:21.574 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/15 09:08:21.574 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/15 09:08:26.046 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/15 09:08:26.046 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/15 09:08:26.056 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/15 09:08:26.056 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/15 09:08:48.484 [1;44m[D][0m [mark.go:109]  bgpurl:/www/bbbmarkservices/bgpdir/490c6f055659913a3906863b55832005/Paper_A4P-46787.png
+
+2021/11/15 09:08:48.484 [1;44m[D][0m [mark.go:119]  file /www/bbbmarkservices/bgpdir/490c6f055659913a3906863b55832005/Paper_A4P-46787.png exist,download it.
+
+2021/11/15 09:27:20.837 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.840 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.842 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.848 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.851 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.853 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.855 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.857 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.863 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.865 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/15 09:27:20.866 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/15 09:27:20.875 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/15 09:27:20.875 [1;35m[C][0m [server.go:258]  ListenAndServe:  listen tcp :9090: bind: address already in use
+
+2021/11/16 05:51:55.747 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.753 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.754 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.755 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.758 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.761 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.764 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.767 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.772 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.773 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 05:51:55.775 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/16 05:51:55.785 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/16 05:52:26.074 [1;44m[D][0m [user.go:268]  The current operation system is  linux
+
+2021/11/16 05:52:26.074 [1;44m[D][0m [user.go:274]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/16 05:52:26.363 [1;44m[D][0m [user.go:295]  BBB铺码工具 V1.4.2211012
+
+
+2021/11/16 05:52:26.363 [1;44m[D][0m [user.go:304]  BBB%E9%93%BA%E7%A0%81%E5%B7%A5%E5%85%B7+V1.4.2211012%0A
+
+2021/11/16 06:37:55.728 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.731 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.733 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.736 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.739 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.743 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.746 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.749 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.751 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.754 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/16 06:37:55.756 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/16 06:37:55.763 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/16 06:42:57.444 [1;44m[D][0m [user.go:269]  The current operation system is  linux
+
+2021/11/16 06:42:57.444 [1;44m[D][0m [user.go:275]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/16 06:43:00.094 [1;44m[D][0m [user.go:269]  The current operation system is  linux
+
+2021/11/16 06:43:00.094 [1;44m[D][0m [user.go:275]  The embedder program is  EmbedderCLI/./EmbedderCLI
+
+2021/11/16 06:43:00.186 [1;44m[D][0m [mask.go:1181]  bgplist
+
+2021/11/19 09:20:30.617 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.620 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.625 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.627 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.629 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.631 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.633 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.639 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.641 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.643 [1;44m[D][0m [connectManager.go:46]  Connected to MongoDB!
+
+2021/11/19 09:20:30.644 [1;44m[D][0m [main.go:26]  The current operation system is  linux
+
+2021/11/19 09:20:30.659 [1;34m[I][0m [server.go:241]  http server Running on http://:9090
+
+2021/11/23 03:52:47.476 [1;44m[D][0m [user.go:269]  The current operation system is  linux
+
+2021/11/23 03:52:47.476 [1;44m[D][0m [user.go:275]  The embedder program is  EmbedderCLI/./EmbedderCLI
+

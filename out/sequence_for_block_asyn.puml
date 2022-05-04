@@ -1,0 +1,10 @@
+@startuml
+participant Wallet_NODE
+participant Central_NODE
+
+
+Wallet_NODE->Central_NODE:Send Verzion request
+Central_NODE-->Wallet_NODE:Send Verzion or getblocks response
+Wallet_NODE->Central_NODE:Send getdata(block) request
+Central_NODE-->Wallet_NODE:Send block response
+@enduml

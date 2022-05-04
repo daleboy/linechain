@@ -1,0 +1,12 @@
+@startuml
+participant Wallet_NODE
+participant Central_NODE
+participant Miner_NODE
+participant Other_NODES
+
+Wallet_NODE->Central_NODE:Send tx command to central node
+Central_NODE->Other_NODES:Send Ivn(Type:tx) to other nodes
+Miner_NODE->Central_NODE:Send getdata(Type:tx) request
+Central_NODE->Miner_NODE:Send tx command to miner node
+Miner_NODE->Other_NODES:Send Ivn(Type:block) to other nodes
+@enduml

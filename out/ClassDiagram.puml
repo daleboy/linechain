@@ -1,0 +1,221 @@
+@startuml
+namespace blockchain7 {
+    class Block << (S,Aquamarine) >> {
+        + Timestamp int64
+        + Transactions []*Transaction
+        + PrevBlockHash []byte
+        + Nonce int
+        + Hash []byte
+        + Height int
+
+        + HashTransactions() []byte
+        + Serialize() []byte
+
+    }
+    Block "1" *.."N" Transaction 
+
+    class Blockchain << (S,Aquamarine) >> {
+        + Tip []byte
+        + Db *bolt.DB
+
+        + MineBlock(transactions []*Transaction) *Block
+        + Iterator() *BlockchainIterator
+        + FindUnspentTransaction(pubKeyHash []byte) []Transaction
+        + FindUTXO() (<font color=blue>map</font>[string]TxOutputs, <font color=blue>map</font>[string]common.Hash)
+        + AddBlock(block *Block) 
+        + GetBestHeight() int
+        + GetBlock(blockHash []byte) (Block, error)
+        + GetBlockHashes() [][]byte
+        + FindSpendableOutput(pubKeyHash []byte, amount int) (int, <font color=blue>map</font>[string][]int)
+        + FindTransactionForUTXO(txID []byte) (Transaction, error)
+        + FindTransaction(txID []byte) (Transaction, error)
+        + SignTransaction(tx *Transaction, privKey ecdsa.PrivateKey) 
+        + VerifyTransaction(tx *Transaction) bool
+
+    }
+    Blockchain --> Transaction
+    Blockchain --> Block
+
+    class BlockchainIterator << (S,Aquamarine) >> {
+        - currentHash []byte
+        - db *bolt.DB
+
+        + Next() *Block
+
+    }
+    BlockchainIterator -->Block
+
+    class CLI << (S,Aquamarine) >> {
+        - printUsage() 
+        - validateArgs() 
+        - createBlockchain(address string, nodeID string) 
+        - createWallet(nodeID string) 
+        - getBalance(address string, nodeID string) 
+        - listAddresses(nodeID string) 
+        - printChain(nodeID string) 
+        - reindexUTXO(nodeID string) 
+        - send(from string, to string, amount int, nodeID string, mineNow bool) 
+        - startNode(nodeID string, minerAddress string) 
+
+        + Run() 
+
+    }
+
+    class Hash << (S,Aquamarine) >> {
+        + Bytes() []byte
+        + Big() *big.Int
+        + Hex() string
+        + String() string
+        + Format(s fmt.State, c rune) 
+        + SetBytes(b []byte) 
+
+    }
+    class MerkleNode << (S,Aquamarine) >> {
+        + Left *MerkleNode
+        + Right *MerkleNode
+        + Data []byte
+
+    }
+    
+    class MerkleTree << (S,Aquamarine) >> {
+        + RootNode *MerkleNode
+
+    }
+    MerkleTree "1"*--"N" MerkleNode
+
+    class ProofOfWork << (S,Aquamarine) >> {
+        - block *Block
+        - target *big.Int
+
+        - prepareData(nonce int) []byte
+
+        + Run() (int, []byte)
+        + Validate() bool
+
+    }
+    ProofOfWork "1"..>"1" Block
+
+    class Transaction << (S,Aquamarine) >> {
+        + ID []byte
+        + Vin []TxInput
+        + Vout []TxOutput
+        + Timestamp int64
+
+        + IsCoinbase() bool
+        + Serialize() []byte
+        + Hash() []byte
+        + Sign(privKey ecdsa.PrivateKey, prevTXs <font color=blue>map</font>[string]Transaction) 
+        + String() string
+        + TrimmedCopy() Transaction
+        + Verify(prevTXs <font color=blue>map</font>[string]Transaction) bool
+
+    }
+    Transaction "1"*--"N" TxInput
+    Transaction "1"*--"N" TxOutput
+
+    class TxInput << (S,Aquamarine) >> {
+        + Txid []byte
+        + Vout int
+        + Signature []byte
+        + PubKey []byte
+
+        + UsesKey(pubKeyHash []byte) bool
+
+    }
+    class TxOutput << (S,Aquamarine) >> {
+        + Value int
+        + PubKeyHash []byte
+
+        + Lock(address []byte) 
+        + IsLockedWithKey(pubKeyHash []byte) bool
+
+    }
+    class TxOutputs << (S,Aquamarine) >> {
+        + Outputs []TxOutput
+
+        + Serialize() []byte
+
+    }
+    TxOutputs "1" o-- "N" TxOutput
+
+    class UTXOSet << (S,Aquamarine) >> {
+        + Blockchain *Blockchain
+
+        + FindSpendableOutputs(pubkeyHash []byte, amount int) (int, <font color=blue>map</font>[string][]int)
+        + FindUTXO(pubKeyHash []byte) []TxOutput
+        + CountTransactions() int
+        + Reindex() 
+        + Update(block *Block) 
+
+    }
+    UTXOSet "1"-->"1" Blockchain
+    UTXOSet ..> Block
+
+    class Wallet << (S,Aquamarine) >> {
+        + PrivateKey ecdsa.PrivateKey
+        + PublicKey []byte
+
+        + GetAddress() []byte
+
+    }
+    class Wallets << (S,Aquamarine) >> {
+        + Wallets <font color=blue>map</font>[string]*Wallet
+
+        + CreateWallet() string
+        + GetAddresses() []string
+        + GetWallet(address string) Wallet
+        + LoadFromFile(nodeID string) error
+        + SaveToFile(nodeID string) 
+
+    }
+    Wallets "1" o-- "N" Wallet
+    
+    class addr << (S,Aquamarine) >> {
+        + AddrList []string
+
+    }
+    class block << (S,Aquamarine) >> {
+        + AddrFrom string
+        + Block []byte
+
+    }
+    class blockchain7.Hash << (T, #FF7700) >>  {
+    }
+    class decError << (S,Aquamarine) >> {
+        - msg string
+
+        + Error() string
+
+    }
+    class getblocks << (S,Aquamarine) >> {
+        + AddrFrom string
+
+    }
+    class getdata << (S,Aquamarine) >> {
+        + AddrFrom string
+        + Type string
+        + ID []byte
+
+    }
+    class inv << (S,Aquamarine) >> {
+        + AddrFrom string
+        + Type string
+        + Items [][]byte
+
+    }
+    class tx << (S,Aquamarine) >> {
+        + AddFrom string
+        + Transaction []byte
+
+    }
+    class verzion << (S,Aquamarine) >> {
+        + Version int
+        + BestHeight int
+        + AddrFrom string
+
+    }
+}
+
+
+"__builtin__.[]byte" #.. "blockchain7.Hash"
+@enduml
