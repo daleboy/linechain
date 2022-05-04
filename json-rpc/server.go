@@ -9,7 +9,7 @@ import (
 	"net/rpc/jsonrpc"
 	"os"
 
-	"linechain/cmd/utils"
+	"linechain/console/utils"
 	blockchain "linechain/core"
 	appUtils "linechain/util/utils"
 

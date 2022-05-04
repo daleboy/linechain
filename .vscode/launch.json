@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "remotePath": "",
+            "debugAdapter": "legacy",
+            //"port": 5546,
+            "program": "E:\\go_project\\src\\sd-chain\\blockchain\\cmd\\demon",
+            "env": {},
+            //"args": ["createblockchain","-address","16XvAVy8TuVLrRVcFrWTABwit6cA1CjrjA"]
+            //"args": ["getbalance","-address","1PnfyKmZMGhyXSacbmBZ3EG2Bn5PLQdJKE"]
+            //"args": ["printchain"]
+            //"args": ["listaddresses"]
+            //"args": ["init","--address","1P5Bf2VWMZcH1zErW5tecFhRm65bVaPXU5","--instanceid","1000"]
+            "args": ["send","--sendfrom","1P5Bf2VWMZcH1zErW5tecFhRm65bVaPXU5","--sendto","18q67cbMjpDr569zy3h1NsiGPNy7xAzdSZ","--amount","10","--mine","true","--instanceid","1000"]
+            //"args": ["startnode"]
+        }
+    ]
+}

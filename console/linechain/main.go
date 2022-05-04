@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"linechain/cmd/utils"
+	"linechain/console/utils"
 	blockchain "linechain/core"
 	jsonrpc "linechain/json-rpc"
 	"linechain/p2p"
