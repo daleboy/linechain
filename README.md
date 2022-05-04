@@ -1,5 +1,11 @@
 # The linechain
 
+## online documents
+
+[项目详解](https://markdown.com.cn "呈现项目所有的细节")。
+
+<https://www.kancloud.cn/daleboy/blockchain/2718039>
+
 ## Flow Diagram
 
 ![flow diagram](public/blockchain.png)
@@ -285,11 +291,11 @@ Merkle树可以简单地定义为二进制哈希树数据结构，它由一组�
 
 - 改善Memorypool和Mining的实现
 - 节点内存池
-- 基本的虚拟机
+- 虚拟机（运行智能合约）
 - 测试覆盖
 - 改善错误处理
-- 脚本语言支持（智能合约支持）
-- 解决分支问题（fork）
+- 脚本语言支持（智能合约支持，初步考虑集成以太坊的智能合约模块）
+- 解决分叉问题（fork）
 - 节点内存池
 - 验证节点（轻节点）
 - 挖矿节点（轻节点）
