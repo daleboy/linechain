@@ -21,7 +21,7 @@
 | 文件夹     | 内容                                         |
 |:-----------|:-------------------------------------------------|
 | `./p2p`    | 网络层    ||
-| `./cmd`    | CLI脚本，可与blockchain交互  |
+| `./console`    | CLI脚本，可与blockchain交互  |
 | `./wallet` | Wallet源码                            |
 | `./api`| 使用Go, Python, Rust 和 JS 等编写的API封装                              |
 
@@ -141,13 +141,13 @@ Merkle树可以简单地定义为二进制哈希树数据结构，它由一组�
 
 ![flow diagram](public/networking-overview.png)
 
-## Demon CLI
+## linechain CLI
 
 这是本项目官方的命令行工具，命令行工具允许开发者与区块链网络交互。
 
 ### Build CLI
 
-导航到cmd/demon目录，运行以下命令创建cli：
+导航到cmd/linechain目录，运行以下命令创建cli：
 
     go build
 
@@ -157,40 +157,40 @@ Merkle树可以简单地定义为二进制哈希树数据结构，它由一组�
 
 #### 产生一个新钱包.这里intanceid请与blockchain的instanceId保持一致，以指定钱包文件的目录
 
-    ./demon wallet new --intanceid INSTANCE_ID
+    ./linechain wallet new --intanceid INSTANCE_ID
 
 #### 列出所有钱包地址.这里intanceid请与blockchain的instanceId保持一致，以指定钱包文件的目录
 
-    ./demon wallet listaddress --intanceid INSTANCE_ID
+    ./linechain wallet listaddress --intanceid INSTANCE_ID
 
 #### 获得余额
 
-    ./demon wallet balance --address ADDRESS --intanceid INSTANCE_ID
+    ./linechain wallet balance --address ADDRESS --intanceid INSTANCE_ID
 
 #### 打印区块链信息
 
-    ./demon print --intanceid INSTANCE_ID
+    ./linechain print --intanceid INSTANCE_ID
 
 #### 计算UTXOs
 
-    ./demon computeutxos --intanceid INSTANCE_ID
+    ./linechain computeutxos --intanceid INSTANCE_ID
 
 #### 发送
 
-    ./demon send --sendfrom ADDRESS --sendto ADDRESS --amount AMOUNT --intanceid INSTANCE_ID
+    ./linechain send --sendfrom ADDRESS --sendto ADDRESS --amount AMOUNT --intanceid INSTANCE_ID
 
 #### 启动一个RPC服务器
 
 默认端口是**5000**
-    ./demon --rpc true --rpcport 4000 --intanceid INSTANCE_ID
+    ./linechain --rpc true --rpcport 4000 --intanceid INSTANCE_ID
 
 #### 开始一个节点
 
 作为矿工
-    ./demon startnode --port PORT --address MINER_ADDRESS --miner --instanceid INSTANCE_ID
+    ./linechain startnode --port PORT --address MINER_ADDRESS --miner --instanceid INSTANCE_ID
 
 作为全节点
-    ./demon startnode --port PORT  --fullnode --instanceid INSTANCE_ID
+    ./linechain startnode --port PORT  --fullnode --instanceid INSTANCE_ID
 
 如果这些标志在`.env`文件中已经存在，address, fullnode, miner 和 port 标志均为可选参数。
 
@@ -213,18 +213,18 @@ Merkle树可以简单地定义为二进制哈希树数据结构，它由一组�
 #### Initialize a blockchain
 
 这个命令创建创世区块，并初始化区块链。Instanceid允许你运行该区块链的多个实例，它必须是一个字符串，如5000
-    ./demon init --address <YOUR_WALLET_ADDERESS> --instanceid <USE_ANYTHING>
+    ./linechain init --address <YOUR_WALLET_ADDERESS> --instanceid <USE_ANYTHING>
 
 #### 在启用RPC的情况下启动区块链实例
 
 作为矿工
-    ./demon startnode --port PORT --address MINER_ADDRESS --miner --rpc --rpcport PORT  --instanceid INSTANCE_ID
+    ./linechain startnode --port PORT --address MINER_ADDRESS --miner --rpc --rpcport PORT  --instanceid INSTANCE_ID
 
 作为全节点
-    ./demon startnode --port PORT --fullnode --rpc --rpcport PORT --instanceid INSTANCE_ID
+    ./linechain startnode --port PORT --fullnode --rpc --rpcport PORT --instanceid INSTANCE_ID
 
 作为普通节点
-    ./demon startnode --instanceid INSTANCE_ID --rpc --rpcport PORT --instanceid INSTANCE_ID
+    ./linechain startnode --instanceid INSTANCE_ID --rpc --rpcport PORT --instanceid INSTANCE_ID
 
 #### 节点JSON-RPC服务器
 
@@ -255,8 +255,8 @@ Merkle树可以简单地定义为二进制哈希树数据结构，它由一组�
 #### 命令行用法
 
     用法:
-    demon [flags]
-    demon [command]
+    linechain [flags]
+    linechain [command]
 
     可用Commands:
         computeutxos 重建和计算Unspent transaction outputs
@@ -269,13 +269,13 @@ Merkle树可以简单地定义为二进制哈希树数据结构，它由一组�
 
     Flags:
             --address string      钱包地址
-        -h, --help                demon命令帮助
+        -h, --help                linechain命令帮助
             --instanceid string   节点实例ID（所有命令都必须加此参数）
             --rpc                 启用HTTP-RPC server
             --rpcaddr string      HTTP-RPC server监听地址 (默认:localhost)
             --rpcport string       HTTP-RPC server监听端口(默认: 5000)
 
-    使用 "demon [command] --help" 得到特定命令的更多信息
+    使用 "linechain [command] --help" 得到特定命令的更多信息
 
 ## 挑战
 
