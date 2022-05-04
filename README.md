@@ -2,7 +2,7 @@
 
 ## online documents
 
-[项目详解](https://www.kancloud.cn/daleboy/blockchain/2718039 "呈现项目所有的细节")。
+[项目详解](https://www.kancloud.cn/daleboy/blockchain/2718039 "呈现项目所有的细节")
 
 ## Flow Diagram
 
