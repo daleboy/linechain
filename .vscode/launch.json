@@ -9,7 +9,7 @@
             "remotePath": "",
             "debugAdapter": "legacy",
             //"port": 5546,
-            "program": "E:\\go_project\\src\\sd-chain\\blockchain\\console\\linechain",
+            "program": "E:\\go_project\\src\\linechain\\console\\linechain",
             "env": {},
             //"args": ["createblockchain","-address","16XvAVy8TuVLrRVcFrWTABwit6cA1CjrjA"]
             //"args": ["getbalance","-address","1PnfyKmZMGhyXSacbmBZ3EG2Bn5PLQdJKE"]
