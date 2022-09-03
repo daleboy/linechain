@@ -18,6 +18,7 @@ import (
 	discovery "github.com/libp2p/go-libp2p-discovery"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	mplex "github.com/libp2p/go-libp2p-mplex"
+	quic "github.com/libp2p/go-libp2p-quic-transport"
 	yamux "github.com/libp2p/go-libp2p-yamux"
 	tcp "github.com/libp2p/go-tcp-transport"
 	ws "github.com/libp2p/go-ws-transport"
@@ -33,7 +34,7 @@ import (
 
 const (
 	version       = 1
-	commandLength = 20//命令长度为20个字节
+	commandLength = 20 //命令长度为20个字节
 )
 
 // 说明：以下很多由Network实例调用的方法，方法的实例net由startNode调用获得
@@ -44,11 +45,11 @@ var (
 	MiningChannel    = "mining-channel"
 	FullNodesChannel = "fullnodes-channel"
 	MinerAddress     = ""
-	blocksInTransit  = [][]byte{}//待交换中所有block的哈希（通过发送inv，获取的block可能有多个，可以先缓存于此）
-	memoryPool       = memopool.MemoPool{//交易池
-		Pending:map[string]blockchain.Transaction{},
-		Queued:map[string]blockchain.Transaction{},
-		Wg:sync.WaitGroup{},
+	blocksInTransit  = [][]byte{}         //待交换中所有block的哈希（通过发送inv，获取的block可能有多个，可以先缓存于此）
+	memoryPool       = memopool.MemoPool{ //交易池
+		Pending: map[string]blockchain.Transaction{},
+		Queued:  map[string]blockchain.Transaction{},
+		Wg:      sync.WaitGroup{},
 	}
 )
 
@@ -131,7 +132,7 @@ func (net *Network) HandleBlock(content *ChannelContent) {
 		//将此block的hash从待交换block hashes列表中移除
 		blocksInTransit = blocksInTransit[1:]
 	} else {
-		UTXO := blockchain.UTXOSet{Blockchain:net.Blockchain}
+		UTXO := blockchain.UTXOSet{Blockchain: net.Blockchain}
 		UTXO.Compute()
 	}
 }
@@ -202,8 +203,8 @@ func (net *Network) HandleInv(content *ChannelContent) {
 	if payload.Type == "block" {
 		if len(payload.Items) >= 1 {
 			//修复bug：应当请求 payload.Items 中所有的区块，而不是一个区块
-			for _,blockHash:=range payload.Items{
-				net.SendGetData(payload.SendFrom, "block", blockHash)//请求一个完整区块
+			for _, blockHash := range payload.Items {
+				net.SendGetData(payload.SendFrom, "block", blockHash) //请求一个完整区块
 				//检查下收到的block的hash是否存在于待交换
 				for _, b := range blocksInTransit {
 					if bytes.Compare(b, blockHash) != 0 {
@@ -326,7 +327,7 @@ func (net *Network) HandleGetTxFromPool(content *ChannelContent) {
 		log.Panic(err)
 	}
 
-	if len(memoryPool.Pending) >= payload.Count {//如果挂起的交易数量达到指定的数量，交给挖矿节点挖矿
+	if len(memoryPool.Pending) >= payload.Count { //如果挂起的交易数量达到指定的数量，交给挖矿节点挖矿
 		txs := memoryPool.GetTransactions(payload.Count)
 		net.SendTxPoolInv(payload.SendFrom, "tx", txs)
 	} else {
@@ -359,7 +360,7 @@ func (net *Network) HandleTx(content *ChannelContent) {
 		//如果tx来自本地节点，说明本地节点不是挖矿节点，也没有挖出它，就将它加入到Pending中，成为tx类型的inv，
 		//在其它节点请求tx时候，将本地tx发给对方处理
 		memoryPool.Add(tx)
-		if net.Miner {//当前节点为矿工节点
+		if net.Miner { //当前节点为矿工节点
 			//将交易移到排队队列
 			memoryPool.Move(tx, "queued")
 			log.Info("MINING")
@@ -390,14 +391,14 @@ func (net *Network) MineTx(memopoolTxs map[string]blockchain.Transaction) {
 	cbTx := blockchain.MinerTx(MinerAddress, "")
 	txs = append(txs, cbTx)
 	newBlock := chain.MineBlock(txs)
-	UTXOs := blockchain.UTXOSet{Blockchain:chain}
+	UTXOs := blockchain.UTXOSet{Blockchain: chain}
 	UTXOs.Compute()
 
 	log.Info("挖出新的区块")
 
 	//peerId为空，SendInv发布给全网
 	net.SendInv("", "block", [][]byte{newBlock.Hash})
-	memoryPool.ClearAll()//清除内存池中的全部交易
+	memoryPool.ClearAll() //清除内存池中的全部交易
 	memoryPool.Wg.Done()
 }
 
@@ -420,7 +421,7 @@ func (net *Network) MinersEventLoop() {
 	for {
 		select {
 		case <-poolCheckTicker.C:
-			tnx := TxFromPool{net.Host.ID().Pretty(), 1}//每次取一条交易，可以优化为每次取多条交易
+			tnx := TxFromPool{net.Host.ID().Pretty(), 1} //每次取一条交易，可以优化为每次取多条交易
 			payload := GobEncode(tnx)
 			request := append(CmdToBytes("gettxfrompool"), payload...)
 			net.FullNodesChannel.Publish("内存池中交易 gettxfrompool 命令", request, "")
@@ -434,14 +435,14 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 	var r io.Reader
 
 	//Reader 是加密安全随机数生成器的全局共享实例
-	r = rand.Reader//没有指定seed，使用随机种子
-	
+	r = rand.Reader //没有指定seed，使用随机种子
+
 	MinerAddress = minerAddress
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()//释放相关资源
+	defer cancel() //释放相关资源
 
-	defer chain.Database.Close()//函数运行结束，关闭区块链数据库
-	go appUtils.CloseDB(chain)//启动协程，遇到程序强行终止信号时关闭数据库，退出程序
+	defer chain.Database.Close() //函数运行结束，关闭区块链数据库
+	go appUtils.CloseDB(chain)   //启动协程，遇到程序强行终止信号时关闭数据库，退出程序
 
 	// 为本主机（host）创建一对新的 RSA 密钥
 	// 一般情况下，是事先创建本机的密钥文件，然后调用LoadKeyFromFile来读取私钥
@@ -450,15 +451,22 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 		panic(err)
 	}
 
+	//go-ws-transport：ws协议
+	//go-tcp-transport：tcp协议（连接三次握手）
+	//go-libp2p-quic-transport：quic协议（连接0次握手，移动时代的协议）
+	//go-udp-transport：udp协议
+	//go-utp-transport：uTorrent 协议(UTP)
+	//go-libp2p-circuit：relay协议
+	//go-libp2p-transport-upgrader：upgrades multiaddr-net connections into full libp2p transports
 	transports := libp2p.ChainOptions(
-		libp2p.Transport(tcp.NewTCPTransport),//支持TCP传输协议
-		libp2p.Transport(ws.New),//支持websorcket传输协议
-		
+		libp2p.Transport(tcp.NewTCPTransport), //支持TCP传输协议
+		libp2p.Transport(ws.New),              //支持websocket传输协议
+		libp2p.Transport(quic.NewTransport),   //支持quic传输协议
 	)
 
 	muxers := libp2p.ChainOptions(
-		libp2p.Muxer("/yamux/1.0.0", yamux.DefaultTransport),//支持"/yamux/1.0.0"流连接(基于可靠连接的多路I/O复用)
-		libp2p.Muxer("/mplex/6.7.0", mplex.DefaultTransport),//支持"/mplex/6.7.0"流连接（二进制流多路I/O复用），由LibP2P基于multiplex创建
+		libp2p.Muxer("/yamux/1.0.0", yamux.DefaultTransport), //支持"/yamux/1.0.0"流连接(基于可靠连接的多路I/O复用)
+		libp2p.Muxer("/mplex/6.7.0", mplex.DefaultTransport), //支持"/mplex/6.7.0"流连接（二进制流多路I/O复用），由LibP2P基于multiplex创建
 	)
 
 	if len(listenPort) == 0 {
@@ -466,12 +474,12 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 	}
 
 	listenAddrs := libp2p.ListenAddrStrings(
-		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", listenPort),//支持tcp传输
-		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s/ws", listenPort),//支持websorket传输
+		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", listenPort),    //支持tcp传输
+		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s/ws", listenPort), //支持websorket传输
 	)
 
-	// Host是参与p2p网络的对象，它实现协议或提供服务。 
-	// 它像服务器一样处理请求，像客户端一样发出请求。 
+	// Host是参与p2p网络的对象，它实现协议或提供服务。
+	// 它像服务器一样处理请求，像客户端一样发出请求。
 	// 之所以称为 Host，是因为它既是 Server 又是 Client（而 Peer 可能会混淆）。
 	// 1、创建host
 	// 重要：创建主机host
@@ -545,8 +553,8 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 		MiningChannel:    miningChannel,
 		FullNodesChannel: fullNodesChannel,
 		Blockchain:       chain,
-		Blocks:           make(chan *blockchain.Block, 200),//新Block数量不超过200个
-		Transactions:     make(chan *blockchain.Transaction, 200),//新Tansaction数量不超过200个
+		Blocks:           make(chan *blockchain.Block, 200),       //新Block数量不超过200个
+		Transactions:     make(chan *blockchain.Transaction, 200), //新Tansaction数量不超过200个
 		Miner:            miner,
 	}
 
@@ -583,11 +591,11 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 func HandleEvents(net *Network) {
 	for {
 		select {
-			// mine := true
-		case block := <-net.Blocks://如果 Blocks 队列新增数据（block数据），全网广播
+		// mine := true
+		case block := <-net.Blocks: //如果 Blocks 队列新增数据（block数据），全网广播
 			net.SendBlock("", block)
-		case tnx := <-net.Transactions://如果 Transactions 队列新增数据（Transaction数据），全网广播
-			 //mine := false
+		case tnx := <-net.Transactions: //如果 Transactions 队列新增数据（Transaction数据），全网广播
+			//mine := false
 			net.SendTx("", tnx)
 		}
 	}
@@ -616,16 +624,16 @@ func SetupDiscovery(ctx context.Context, host host.Host) error {
 
 	//如果在startnode中创建本地缓存数据库，可以执行如下开启DHT的方式：
 	/*
-	dataStorePath := fmt.Sprintf(".dht-%s-%s", *ip, *port)
-	dataStore, err := badger.NewDatastore(dataStorePath, nil)
-	if err != nil {
-		utils.FatalErrMsg(err, "cannot initialize DHT cache at %s", dataStorePath)
-	}
-	dht := kaddht.NewDHT(context.Background(), host.GetP2PHost(), dataStore)
+		dataStorePath := fmt.Sprintf(".dht-%s-%s", *ip, *port)
+		dataStore, err := badger.NewDatastore(dataStorePath, nil)
+		if err != nil {
+			utils.FatalErrMsg(err, "cannot initialize DHT cache at %s", dataStorePath)
+		}
+		dht := kaddht.NewDHT(context.Background(), host.GetP2PHost(), dataStore)
 
-	if err := dht.Bootstrap(context.Background()); err != nil {
-		utils.FatalErrMsg(err, "cannot bootstrap DHT")
-	}*/
+		if err := dht.Bootstrap(context.Background()); err != nil {
+			utils.FatalErrMsg(err, "cannot bootstrap DHT")
+		}*/
 
 	// 引导DHT。在缺省设置下，这生成一个后台线程，每5分钟刷新对等端表格
 	log.Info("引导DHT")
@@ -648,8 +656,7 @@ func SetupDiscovery(ctx context.Context, host host.Host) error {
 			}
 		}()
 	}
-	wg.Wait()//阻塞，确保所有的协程全部返回
-
+	wg.Wait() //阻塞，确保所有的协程全部返回
 
 	// 我们使用一个会合点“wlsell.com”来宣布我们的位置
 	// 这就像告诉你的朋友在某个具体的地点会合
@@ -658,7 +665,6 @@ func SetupDiscovery(ctx context.Context, host host.Host) error {
 	discovery.Advertise(ctx, routingDiscovery, "rendezvous:wlsell.com")
 	log.Info("成功宣布!")
 
-	
 	// 现在，查找那些已经宣布的对等端
 	// 这就像你的朋友告诉你会合的地点
 	log.Info("搜索其它的对等端...")
@@ -670,7 +676,7 @@ func SetupDiscovery(ctx context.Context, host host.Host) error {
 	// 连接到所有新发现的对等端（peer）
 	for peer := range peerChan {
 		if peer.ID == host.ID() {
-			continue//不连接自己
+			continue //不连接自己
 		}
 		log.Debug("找到对等端:", peer)
 
