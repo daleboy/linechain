@@ -4,22 +4,23 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/peer"
 
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 )
 
 const ChannelBufSize = 128
+
 // Channel 的数据结构
 type Channel struct {
 	ctx   context.Context
-	pub   *pubsub.PubSub//发布者
+	pub   *pubsub.PubSub //发布者
 	topic *pubsub.Topic
-	sub   *pubsub.Subscription//订阅者
+	sub   *pubsub.Subscription //订阅者
 
 	channelName string //构成Topic名称字符串的组成部分（TopicName="channel:" + channelName）
 	self        peer.ID
-	Content     chan *ChannelContent//ChannelContent类型的通道（带缓冲的通道，缓冲数量为 ChannelBufSize）
+	Content     chan *ChannelContent //ChannelContent类型的通道（带缓冲的通道，缓冲数量为 ChannelBufSize）
 }
 
 type ChannelContent struct {
@@ -41,7 +42,7 @@ func JoinChannel(ctx context.Context, pub *pubsub.PubSub, selfID peer.ID, channe
 
 	//确定订阅的节点，才会得到订阅-发布系统中的消息
 	if subscribe {
-		sub, err = topic.Subscribe()//订阅pubsub的pub消息
+		sub, err = topic.Subscribe() //订阅pubsub的pub消息
 		if err != nil {
 			return nil, err
 		}
@@ -56,11 +57,11 @@ func JoinChannel(ctx context.Context, pub *pubsub.PubSub, selfID peer.ID, channe
 		sub:         sub,
 		self:        selfID,
 		channelName: channelName,
-		Content:     make(chan *ChannelContent, ChannelBufSize),//有缓冲的非阻塞通道，通道大小ChannelBufSize=128
+		Content:     make(chan *ChannelContent, ChannelBufSize), //有缓冲的非阻塞通道，通道大小ChannelBufSize=128
 	}
 
 	//虽然所有的节点都会启动readLoop，但如果该节点没有订阅消息，是不会收到消息的
-	go Channel.readLoop()//循环读取Channel中订阅的消息
+	go Channel.readLoop() //循环读取Channel中订阅的消息
 
 	return Channel, nil
 }
@@ -94,7 +95,7 @@ func (channel *Channel) readLoop() {
 	if channel.sub == nil {
 		return
 	}
-	for {//无限循环
+	for { //无限循环
 		content, err := channel.sub.Next(channel.ctx)
 		if err != nil {
 			close(channel.Content)

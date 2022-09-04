@@ -17,7 +17,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/gdamore/tcell/v2"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 // CLIUI 是给对等端使用的文本用户界面（Text User Interface (TUI)）
@@ -30,7 +30,7 @@ type CLIUI struct {
 	peersList        *tview.TextView
 
 	hostWindow *tview.TextView
-	inputCh    chan string //带缓冲的通道，缓冲数量1
+	inputCh    chan string   //带缓冲的通道，缓冲数量1
 	doneCh     chan struct{} //带缓冲的通道，缓冲数量32
 }
 
@@ -87,11 +87,9 @@ func NewCLIUI(generalChannel *Channel, miningChannel *Channel, fullNodesChannel 
 		input.SetText("")
 	})
 
-	
 	peersList := tview.NewTextView()
 	peersList.SetBorder(true)
 	peersList.SetTitle("Peers")
-
 
 	chatPanel := tview.NewFlex().
 		AddItem(msgBox, 0, 1, false).
@@ -128,7 +126,6 @@ func (ui *CLIUI) end() {
 	ui.doneCh <- struct{}{}
 }
 
-
 // refreshPeers 拉取当前在channel中的peer list，并显示peer id的最后八个字符在UI上
 func (ui *CLIUI) refreshPeers() {
 	peers := ui.GeneralChannel.ListPeers()
@@ -164,10 +161,11 @@ func (ui *CLIUI) displaySelfMessage(msg string) {
 	fmt.Fprintf(ui.hostWindow, "%s %s\n", prompt, msg)
 }
 
-func (ui *CLIUI) displayContent(content *ChannelContent) {
-	prompt := withColor("green", fmt.Sprintf("<%s>:", strings.ToUpper(content.SendFrom)))
-	fmt.Fprintf(ui.hostWindow, "%s %s\n", prompt, content.Message)
-}
+// func (ui *CLIUI) displayContent(content *ChannelContent) {
+// 	prompt := withColor("green", fmt.Sprintf("<%s>:", strings.ToUpper(content.SendFrom)))
+// 	fmt.Fprintf(ui.hostWindow, "%s %s\n", prompt, content.Message)
+// }
+
 // HandleStream 真正处理来自全网发来的且可以处理的消息内容
 func (ui *CLIUI) HandleStream(net *Network, content *ChannelContent) {
 	// ui.displayContent(content)
@@ -279,7 +277,7 @@ func (ui *CLIUI) handleEvents(net *Network) {
 	for {
 		select {
 		case input := <-ui.inputCh:
-			err := ui.GeneralChannel.Publish(input, nil, "")//未指定消息接收者，意味着所有节点均会收到
+			err := ui.GeneralChannel.Publish(input, nil, "") //未指定消息接收者，意味着所有节点均会收到
 			if err != nil {
 				log.Errorf("Publish error: %s", err)
 			}
@@ -289,13 +287,13 @@ func (ui *CLIUI) handleEvents(net *Network) {
 			// 定期刷新peers list
 			ui.refreshPeers()
 
-		case m := <-ui.GeneralChannel.Content://如果 GeneralChannel 收到消息
+		case m := <-ui.GeneralChannel.Content: //如果 GeneralChannel 收到消息
 			ui.HandleStream(net, m)
 
-		case m := <-ui.MiningChannel.Content://如果 MiningChannel 收到消息
+		case m := <-ui.MiningChannel.Content: //如果 MiningChannel 收到消息
 			ui.HandleStream(net, m)
 
-		case m := <-ui.FullNodesChannel.Content://如果 FullNodesChannel 收到消息
+		case m := <-ui.FullNodesChannel.Content: //如果 FullNodesChannel 收到消息
 			ui.HandleStream(net, m)
 
 		case <-ui.GeneralChannel.ctx.Done():

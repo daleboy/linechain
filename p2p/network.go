@@ -13,23 +13,25 @@ import (
 	"time"
 
 	"github.com/libp2p/go-libp2p"
-	"github.com/libp2p/go-libp2p-core/crypto"
-	"github.com/libp2p/go-libp2p-core/peer"
-	discovery "github.com/libp2p/go-libp2p-discovery"
+	discovery "github.com/libp2p/go-libp2p/p2p/discovery/routing"
+	"github.com/multiformats/go-multiaddr"
+
 	dht "github.com/libp2p/go-libp2p-kad-dht"
-	mplex "github.com/libp2p/go-libp2p-mplex"
-	quic "github.com/libp2p/go-libp2p-quic-transport"
-	yamux "github.com/libp2p/go-libp2p-yamux"
-	tcp "github.com/libp2p/go-tcp-transport"
-	ws "github.com/libp2p/go-ws-transport"
+	"github.com/libp2p/go-libp2p/core/crypto"
+	"github.com/libp2p/go-libp2p/core/peer"
+	mplex "github.com/libp2p/go-libp2p/p2p/muxer/mplex"
+	yamux "github.com/libp2p/go-libp2p/p2p/muxer/yamux"
+	quic "github.com/libp2p/go-libp2p/p2p/transport/quic"
+	tcp "github.com/libp2p/go-libp2p/p2p/transport/tcp"
+	ws "github.com/libp2p/go-libp2p/p2p/transport/websocket"
 	log "github.com/sirupsen/logrus"
 
 	blockchain "linechain/core"
 	"linechain/memopool"
 	appUtils "linechain/util/utils"
 
-	"github.com/libp2p/go-libp2p-core/host"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	"github.com/libp2p/go-libp2p/core/host"
 )
 
 const (
@@ -206,9 +208,9 @@ func (net *Network) HandleInv(content *ChannelContent) {
 			//修复bug：应当请求 payload.Items 中所有的区块，而不是一个区块
 			for _, blockHash := range payload.Items {
 				net.SendGetData(payload.SendFrom, "block", blockHash) //请求一个完整区块
-				//检查下收到的block的hash是否存在于待交换
+				//检查下收到的block的hash是否存在于待交换列表blocksInTransit
 				for _, b := range blocksInTransit {
-					if bytes.Compare(b, blockHash) != 0 {
+					if !bytes.Equal(b, blockHash) {
 						blocksInTransit = append(blocksInTransit, b)
 					}
 				}
@@ -415,7 +417,8 @@ func (net *Network) BelongsToMiningGroup(PeerId string) bool {
 
 	return false
 }
-func (net *Network) MinersEventLoop() {
+func (net *Network) MinersEventLoop(ui *CLIUI) {
+	//秒定时器
 	poolCheckTicker := time.NewTicker(time.Second)
 	defer poolCheckTicker.Stop()
 
@@ -427,6 +430,9 @@ func (net *Network) MinersEventLoop() {
 			request := append(CmdToBytes("gettxfrompool"), payload...)
 			net.FullNodesChannel.Publish("内存池中交易 gettxfrompool 命令", request, "")
 			memoryPool.Wg.Add(1)
+
+		case <-ui.doneCh:
+			return
 		}
 	}
 }
@@ -488,6 +494,7 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 	//-如果没有提供security transport，主机使用go-libp2p的noise和/或tls加密的transport来加密所有的traffic(新版本libp2p已经不再支持security transport参数设置)
 	//-如果没有提供peer的identity，它产生一个随机RSA 2048键值对，并由它导出一个新的identity
 	//-如果没有提供peerstore，主机使用一个空的peerstore来进行初始化
+
 	host, err := libp2p.New(
 		//ctx,
 		transports,
@@ -542,7 +549,8 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 
 	// 4、建立对等端（peer）发现机制（discovery），使得本节点可以被网络上的其它节点发现
 	// 同时将主机（host）连接到所有已经发现的对等端（peer）
-	err = SetupDiscovery(ctx, host)
+	var bootstraps []multiaddr.Multiaddr
+	err = SetupDiscovery(ctx, host, bootstraps)
 	if err != nil {
 		panic(err)
 	}
@@ -570,7 +578,7 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 	// 8、如果是矿工节点，启用协程，不断发送ping命令给全节点
 	if miner {
 		// 矿工事件循环，以不断地发送一个 ping 给全节点，目的是得到新的交易，为新交易挖矿，并添加到区块链
-		go network.MinersEventLoop()
+		go network.MinersEventLoop(ui)
 	}
 
 	if err != nil {
@@ -584,6 +592,7 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 	}
 }
 
+// 这里只拦截处理Blocks和Transaction两个通道的消息，三个Channel通道消息这里不处理
 // 仅当启用节点的rpc时候，才会有此两个消息需（系统仅仅支持通过rpc方式发送交易）（cmdutil：send命令）
 // 当本地节点发送交易，如果立如果命令参数指示立即挖矿，则挖矿成功后，会产生blocks消息，在这里发布给全网
 // 如果命令参数指示不立即挖矿，则会产生transactions消息，在这里发布给全网
@@ -610,13 +619,19 @@ func RequestBlocks(net *Network) error {
 }
 
 // SetupDiscovery 建立发现机制，并将本地主机连接到所有已经发现的对等端（peer）
-func SetupDiscovery(ctx context.Context, host host.Host) error {
+func SetupDiscovery(ctx context.Context, host host.Host, bootstrapPeers []multiaddr.Multiaddr) error {
+	var options []dht.Option
+	//如果没有任何启动节点，本节点以server模式运行（作为启动节点）
+	if len(bootstrapPeers) == 0 {
+		//由于mode的值为int，因此缺省情况下为0，即节点运行模式为client
+		options = append(options, dht.Mode(dht.ModeServer))
+	}
 	// 开启一个DHT，用于对等端（peer）发现。
 	// DHT全称叫分布式哈希表(Distributed Hash Table)，是一种分布式存储方法。IpfsDHT是Kademlia算法的一个实现
 	// Kademlia算法是一种分布式存储及路由的算法
 	// 我们不仅仅是创建一个新的DHT，因为我们要求每一个端维护它自己的本地DHT副本，这样
 	// 以来，DHT的引导节点可以关闭，不会影响后续的对等端发现
-	kademliaDHT, err := dht.New(ctx, host)
+	kademliaDHT, err := dht.New(ctx, host, options...)
 	if err != nil {
 		panic(err)
 	}
@@ -661,7 +676,7 @@ func SetupDiscovery(ctx context.Context, host host.Host) error {
 	// 这就像告诉你的朋友在某个具体的地点会合
 	log.Info("宣布我们自己...")
 	routingDiscovery := discovery.NewRoutingDiscovery(kademliaDHT)
-	discovery.Advertise(ctx, routingDiscovery, "rendezvous:wlsell.com")
+	routingDiscovery.Advertise(ctx, "rendezvous:wlsell.com")
 	log.Info("成功宣布!")
 
 	// 现在，查找那些已经宣布的对等端
