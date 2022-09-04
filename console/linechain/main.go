@@ -19,18 +19,17 @@ func main() {
 	var conf = env.New()
 	var address string
 	var instanceId string
-	
+
 	var rpcPort string
 	var rpcAddr string
 	var rpc bool
 
-    
 	cli := utils.CommandLine{
 		Blockchain: &blockchain.Blockchain{
 			Database:   nil,
 			InstanceId: instanceId,
 		},
-		P2p: nil,
+		Network: nil,
 	}
 
 	// 说明：下面每一个命令均各自独立，但部分命令执行的前提是本地区块链数据库已经存在
@@ -131,16 +130,16 @@ func main() {
 		Args:  cobra.MinimumNArgs(0),
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println(miner)
-			if miner && len(minerAddress) == 0 {//节点类型为矿工
+			if miner && len(minerAddress) == 0 { //节点类型为矿工
 				log.Fatalln("需要矿工地址 --address")
 			}
 
 			cli := cli.UpdateInstance(instanceId, false)
-			cli.StartNode(listenPort, minerAddress, miner, fullNode, func(net *p2p.Network) {//最后一个参数是回调函数，获得net实例
+			cli.StartNode(listenPort, minerAddress, miner, fullNode, func(net *p2p.Network) { //最后一个参数是回调函数，获得net实例
 				if rpc {
 					//如果启用rpc，则启动节点后设置cli的P2P实例，net为启动节点函数的回调函数参数被回调后返回的Network实例
 					//如果不启用rpc，则cli.P2p为nil
-					cli.P2p = net
+					cli.Network = net
 					go jsonrpc.StartServer(cli, rpc, rpcPort, rpcAddr)
 				}
 			})
@@ -199,9 +198,9 @@ func main() {
 	/*
 	* HTTP FLAGS
 	 */
-	 //从命令行参数中读取命令所需的各参数
-	 //PersistentFlags为根命令保存的参数，可供它及它下面的子命令使用
-	 //根命令即可执行程序demon命令
+	//从命令行参数中读取命令所需的各参数
+	//PersistentFlags为根命令保存的参数，可供它及它下面的子命令使用
+	//根命令即可执行程序demon命令
 	rootCmd.PersistentFlags().StringVar(&rpcPort, "rpcport", "", "HTTP-RPC服务器正在监听的端口 (默认: 5000)")
 	rootCmd.PersistentFlags().StringVar(&rpcAddr, "rpcaddr", "", "HTTP-RPC服务器监听地址 (默认: localhost)")
 	rootCmd.PersistentFlags().BoolVar(&rpc, "rpc", false, "启用HTTP-RPC服务器")
@@ -220,5 +219,5 @@ func main() {
 	)
 
 	//执行rootCmd
-	rootCmd.Execute()//除非提供参数rpc且rpc为true，否则除了更新instanceID并读取本地区块链，不会执行任何操作
+	rootCmd.Execute() //除非提供参数rpc且rpc为true，否则除了更新instanceID并读取本地区块链，不会执行任何操作
 }

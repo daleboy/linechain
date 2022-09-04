@@ -14,11 +14,11 @@ import (
 )
 
 type CommandLine struct {
-	Blockchain    *blockchain.Blockchain
+	Blockchain *blockchain.Blockchain
 	//如果启用rpc，则启动节点后设置cli的P2P实例，net为启动节点函数的回调函数参数被回调后返回的Network实例
 	//如果不启用rpc，则P2p一直为nil
-	P2p           *p2p.Network
-	CloseDbAlways bool//每次命令执行完毕是否关闭数据库
+	Network       *p2p.Network
+	CloseDbAlways bool //每次命令执行完毕是否关闭数据库
 }
 
 type Error struct {
@@ -39,6 +39,7 @@ type SendResponse struct {
 	Timestamp int64
 	Error     *Error
 }
+
 // StartNode 启动节点，其中fn为回调函数，p2p.StartNode调用过程中调用fn，设置p2p.Network实例
 func (cli *CommandLine) StartNode(listenPort, minerAddress string, miner, fullNode bool, fn func(*p2p.Network)) {
 	if miner {
@@ -58,7 +59,6 @@ func (cli *CommandLine) StartNode(listenPort, minerAddress string, miner, fullNo
 	p2p.StartNode(chain, listenPort, minerAddress, miner, fullNode, fn)
 }
 
-
 // UpdateInstance 设置区块链的instanceid（从命令行参数中读取instanceid参数，设定为cli.Blockchain的InstanceId）
 // 所有与instanceid相关的命令在执行前必须先调用它（无论区块的数据库是否存在）（调用地方是main函数定义命令的RUN实现内）
 func (cli *CommandLine) UpdateInstance(InstanceId string, closeDbAlways bool) *CommandLine {
@@ -74,7 +74,7 @@ func (cli *CommandLine) UpdateInstance(InstanceId string, closeDbAlways bool) *C
 
 // Send 发送代币
 func (cli *CommandLine) Send(from string, to string, amount float64, mineNow bool) SendResponse {
-	
+
 	if !wallet.ValidateAddress(from) {
 		log.Error("sendFrom地址非法")
 		return SendResponse{
@@ -94,21 +94,20 @@ func (cli *CommandLine) Send(from string, to string, amount float64, mineNow boo
 		}
 	}
 
-
 	//从本地数据库读取区块链实例
 	chain := cli.Blockchain.ContinueBlockchain()
 	if cli.CloseDbAlways {
 		defer chain.Database.Close()
 	}
 
-	utxos := blockchain.UTXOSet{Blockchain:chain}
+	utxos := blockchain.UTXOSet{Blockchain: chain}
 	cwd := false
-	wallets, err := wallet.InitializeWallets(cwd,chain.InstanceId)
+	wallets, err := wallet.InitializeWallets(cwd, chain.InstanceId)
 	if err != nil {
 		chain.Database.Close()
 		log.Panic(err)
 	}
-	
+
 	wallet, err := wallets.GetWallet(from)
 	if err != nil {
 		log.Error("请导入sendfrom的钱包到此节点")
@@ -134,20 +133,20 @@ func (cli *CommandLine) Send(from string, to string, amount float64, mineNow boo
 		//如果需要立即挖矿，则自己作为矿工立即挖矿
 		cbTx := blockchain.MinerTx(from, "")
 		txs := []*blockchain.Transaction{cbTx, tx}
-		
+
 		block := chain.MineBlock(txs)
 		log.Info("交易已执行")
 		utxos.Update(block)
 
 		//仅当节点启用rpc时候，cli.P2p才不会为nil
-		if cli.P2p != nil {
-			cli.P2p.Blocks <- block
+		if cli.Network != nil {
+			cli.Network.Blocks <- block
 		}
 	} else {
 		//不需要立即挖矿，将tx放进节点（network）的Transaction消息队列中
 		//仅当节点启用rpc时候，cli.P2p才不会为nil
-		if cli.P2p != nil {
-			cli.P2p.Transactions <- tx
+		if cli.Network != nil {
+			cli.Network.Transactions <- tx
 			log.Info("交易送到本地节点交易内存池")
 		}
 	}
@@ -159,6 +158,7 @@ func (cli *CommandLine) Send(from string, to string, amount float64, mineNow boo
 		Timestamp: time.Now().Unix(),
 	}
 }
+
 // CreateBlockchain 创建全新区块
 func (cli *CommandLine) CreateBlockchain(address string) {
 	if !wallet.ValidateAddress(address) {
@@ -169,7 +169,7 @@ func (cli *CommandLine) CreateBlockchain(address string) {
 	if cli.CloseDbAlways {
 		defer chain.Database.Close()
 	}
-	utxos := blockchain.UTXOSet{Blockchain:chain}
+	utxos := blockchain.UTXOSet{Blockchain: chain}
 	utxos.Compute()
 	log.Info("初始化区块链成功")
 }
@@ -181,11 +181,12 @@ func (cli *CommandLine) ComputeUTXOs() {
 	if cli.CloseDbAlways {
 		defer chain.Database.Close()
 	}
-	utxos := blockchain.UTXOSet{Blockchain:chain}
+	utxos := blockchain.UTXOSet{Blockchain: chain}
 	utxos.Compute()
 	count := utxos.CountTransactions()
 	log.Infof("重建完成!!!!, utxos集合中现有 %d 个交易", count)
 }
+
 // GetBalance 得到某个钱包地址的余额
 func (cli *CommandLine) GetBalance(address string) BalanceResponse {
 	if !wallet.ValidateAddress(address) {
@@ -198,7 +199,7 @@ func (cli *CommandLine) GetBalance(address string) BalanceResponse {
 	balance := float64(0)
 	publicKeyHash := wallet.Base58Decode([]byte(address))
 	publicKeyHash = publicKeyHash[1 : len(publicKeyHash)-4]
-	utxos := blockchain.UTXOSet{Blockchain:chain}
+	utxos := blockchain.UTXOSet{Blockchain: chain}
 
 	UTXOs := utxos.FindUnSpentTransactions(publicKeyHash)
 	for _, out := range UTXOs {
@@ -218,7 +219,7 @@ func (cli *CommandLine) GetBalance(address string) BalanceResponse {
 // CreateWallet 创建一个钱包
 func (cli *CommandLine) CreateWallet(instanceId string) string {
 	cwd := false
-	wallets, _ := wallet.InitializeWallets(cwd,instanceId)
+	wallets, _ := wallet.InitializeWallets(cwd, instanceId)
 	address := wallets.AddWallet()
 	wallets.SaveFile(cwd)
 
@@ -229,7 +230,7 @@ func (cli *CommandLine) CreateWallet(instanceId string) string {
 // ListAddresses 列出所有钱包地址
 func (cli *CommandLine) ListAddresses(instanceId string) {
 	cwd := false
-	wallets, err := wallet.InitializeWallets(cwd,instanceId)
+	wallets, err := wallet.InitializeWallets(cwd, instanceId)
 	if err != nil {
 		log.Panic(err)
 	}

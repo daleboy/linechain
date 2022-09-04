@@ -53,7 +53,8 @@ var (
 	}
 )
 
-// SendBlock 将block发送给peerId节点
+// SendBlock 将block发送给peerId节点（通过general通道，这个通道的消息所有节点均需要订阅）
+// 如果指定peerId，则只发给指定的节点；如果peerId为空，则发布给全网
 func (net *Network) SendBlock(peerId string, b *blockchain.Block) {
 	data := Block{net.Host.ID().Pretty(), b.Serialize()}
 	payload := GobEncode(data)
@@ -432,10 +433,8 @@ func (net *Network) MinersEventLoop() {
 
 // StartNode 启动一个节点
 func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, miner, fullNode bool, callback func(*Network)) {
-	var r io.Reader
-
 	//Reader 是加密安全随机数生成器的全局共享实例
-	r = rand.Reader //没有指定seed，使用随机种子
+	var r io.Reader = rand.Reader //没有指定seed，使用随机种子
 
 	MinerAddress = minerAddress
 	ctx, cancel := context.WithCancel(context.Background())
@@ -474,8 +473,8 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 	}
 
 	listenAddrs := libp2p.ListenAddrStrings(
-		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", listenPort),    //支持tcp传输
-		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s/ws", listenPort), //支持websorket传输
+		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", listenPort),    //tcp传输
+		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s/ws", listenPort), //websorket传输
 	)
 
 	// Host是参与p2p网络的对象，它实现协议或提供服务。
@@ -585,17 +584,17 @@ func StartNode(chain *blockchain.Blockchain, listenPort, minerAddress string, mi
 	}
 }
 
-// HandleEvents 处理两个类别的通道消息：Blocks和Transactions
-// 将block消息或transaction消息通过节点的通信通道发布（Publish）到全网
-// 事实上，仅当启用节点的rpc时候，才会有此两个消息需要发布到全网
+// 仅当启用节点的rpc时候，才会有此两个消息需（系统仅仅支持通过rpc方式发送交易）（cmdutil：send命令）
+// 当本地节点发送交易，如果立如果命令参数指示立即挖矿，则挖矿成功后，会产生blocks消息，在这里发布给全网
+// 如果命令参数指示不立即挖矿，则会产生transactions消息，在这里发布给全网
 func HandleEvents(net *Network) {
 	for {
 		select {
 		// mine := true
 		case block := <-net.Blocks: //如果 Blocks 队列新增数据（block数据），全网广播
 			net.SendBlock("", block)
+		//mine := false
 		case tnx := <-net.Transactions: //如果 Transactions 队列新增数据（Transaction数据），全网广播
-			//mine := false
 			net.SendTx("", tnx)
 		}
 	}
